@@ -25,6 +25,10 @@ export default function Home() {
   const [data, setData] = useState<object | null>(null);
   const [followers, setFollowers] = useState<object | null>(null);
   const [following, setFollowing] = useState<object | null>(null);
+  const [name, setName] = useState<string>("");
+  const [loginName, setLoginName] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [repos, setRepos] = useState<string>("");
   const [urlAvatar, setUrlAvatar] = useState<any>(null);
 
 
@@ -52,12 +56,14 @@ export default function Home() {
     if (user?.length < 0) return;
     const response = await axios.get(`https://api.github.com/users/${user}`);
     try {
-      console.log("URL", data?.data?.avatar_url);
-      console.log(response.data);
-
       setData(response);
       setFollowers(response?.data?.followers);
       setFollowing(response?.data?.following);
+      setName(response?.data?.name);
+      setLoginName(response?.data?.login);
+      setDate(formatedDate(response?.data?.created_at));
+      setRepos(response?.data?.public_repos);
+      setUrlAvatar(response?.data?.avatar_url);
     } catch (err) {
       console.log(err);
     }
@@ -76,31 +82,31 @@ export default function Home() {
       </S.ContainerSearch>
       <S.ContainerPerfil>
         <S.ContainerAvatar>
-          {data ? <S.PerfilAvatar src={data?.data?.avatar_url} /> : null}
+          {urlAvatar.length > 0 ? <S.PerfilAvatar src={urlAvatar} /> : null}
           
             <S.Perfil>
-              <S.PerfilName>{data?.data?.name}</S.PerfilName>
-              <S.UserName> {data ? `@${data?.data?.login}` : null}</S.UserName>
+              <S.PerfilName>{name}</S.PerfilName>
+              <S.UserName> {loginName.length > 0 ? `@${loginName}` : null}</S.UserName>
             </S.Perfil>
             <S.CreateAt>
-              {data
-                ? `Criado em: ${formatedDate(data?.data?.created_at)}`
+              {date.length > 0
+                ? `Criado em: ${date}`
                 : null}
             </S.CreateAt>
          
         </S.ContainerAvatar>
         <S.ContainerRepositories>
           <S.RepositoriesCard>
-            {data ? (
+            {repos.length > 0 ? (
               <>
                 <S.RepositoriesNumber>
-                  {data?.data?.public_repos}
+                  {repos}
                 </S.RepositoriesNumber>
                 <S.RepositoriesName>Repositorios públicos</S.RepositoriesName>
               </>
             ) : null}
           </S.RepositoriesCard>
-        {data ? (
+        {followers && following ? (
           <S.ContainerGraph>
             <Doughnut data={dataDoughnut} height="100" width="100"></Doughnut>
           </S.ContainerGraph>
