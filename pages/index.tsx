@@ -21,7 +21,7 @@ type typeUser = {
 
 export default function Home() {
   // const [fetching, setFetching] = useState("");
-  const [user, getUser] = useState<string | null>(null);
+  const [user, getUser] = useState<string>("");
   const [data, setData] = useState<object | null>(null);
   const [followers, setFollowers] = useState<object | null>(null);
   const [following, setFollowing] = useState<object | null>(null);
