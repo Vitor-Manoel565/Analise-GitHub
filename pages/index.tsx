@@ -29,7 +29,7 @@ export default function Home() {
   const [loginName, setLoginName] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [repos, setRepos] = useState<string>("");
-  const [urlAvatar, setUrlAvatar] = useState<any>(null);
+  const [urlAvatar, setUrlAvatar] = useState<string>("");
 
 
   const dataDoughnut = {
@@ -43,6 +43,7 @@ export default function Home() {
       },
     ],
   };
+  
 
   const formatedDate = (date: string) => {
     const newDate = new Date(date);
@@ -53,7 +54,7 @@ export default function Home() {
   };
 
   async function handleAvatar() {
-    if (user?.length < 0) return;
+    if (user?.length  < 0) return;
     const response = await axios.get(`https://api.github.com/users/${user}`);
     try {
       setData(response);
@@ -82,14 +83,14 @@ export default function Home() {
       </S.ContainerSearch>
       <S.ContainerPerfil>
         <S.ContainerAvatar>
-          {urlAvatar.length > 0 ? <S.PerfilAvatar src={urlAvatar} /> : null}
+          {urlAvatar.length   > 0 ? <S.PerfilAvatar src={urlAvatar} /> : null}
           
             <S.Perfil>
               <S.PerfilName>{name}</S.PerfilName>
-              <S.UserName> {loginName.length > 0 ? `@${loginName}` : null}</S.UserName>
+              <S.UserName> {loginName.length  > 0 ? `@${loginName}` : null}</S.UserName>
             </S.Perfil>
             <S.CreateAt>
-              {date.length > 0
+              {date.length  > 0
                 ? `Criado em: ${date}`
                 : null}
             </S.CreateAt>
@@ -97,7 +98,7 @@ export default function Home() {
         </S.ContainerAvatar>
         <S.ContainerRepositories>
           <S.RepositoriesCard>
-            {repos.length > 0 ? (
+            {repos.length  > 0 ? (
               <>
                 <S.RepositoriesNumber>
                   {repos}
