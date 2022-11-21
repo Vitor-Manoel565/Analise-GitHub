@@ -69,6 +69,9 @@ export default function Home() {
       console.log(err);
     }
   }
+
+  console.log(repos);
+  
   return (
     <S.HomeContainer>
       <S.ContainerSearch>
@@ -98,7 +101,7 @@ export default function Home() {
         </S.ContainerAvatar>
         <S.ContainerRepositories>
           <S.RepositoriesCard>
-            {repos.length  > 0 ? (
+            {repos ? (
               <>
                 <S.RepositoriesNumber>
                   {repos}
