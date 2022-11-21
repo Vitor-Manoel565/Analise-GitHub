@@ -48,11 +48,8 @@ export const SearchButton = styled.button`
 export const ContainerPerfil = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
-  height: 50vh;
   width: 50vw;
-  gap: 2rem;
+  gap: 1rem;
   background-color: #1f2a48;
   color: white;
   font-size: calc(10px + 2vmin);
@@ -63,15 +60,21 @@ export const ContainerPerfil = styled.div`
 
 export const ContainerAvatar = styled.div`
   display: flex;
-  height: 15vh;
+  height: fit-content;
   width: 100%;
   gap: 3rem;
   padding: 20px;
+  flex-direction: row;
+  justify-content: space-between;
   /* background-color: blue; */
   color: white;
   font-size: calc(10px + 2vmin);
   text-align: center;
   border-radius: 20px;
+  @media screen and (max-width: 769px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const PerfilAvatar = styled.img`
@@ -107,13 +110,12 @@ export const ContainerDescription = styled.div`
   font-size: calc(10px + 2vmin);
 `;
 
-
 export const Perfil = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
 `;
 
 export const PerfilName = styled.h1`
@@ -123,56 +125,67 @@ export const PerfilName = styled.h1`
 `;
 
 export const CreateAt = styled.figcaption`
-    font-size: 15px;
-    font-weight: 400;
-    color: white;
+  font-size: 15px;
+  font-weight: 400;
+  color: white;
 `;
 
 export const UserName = styled.figcaption`
-    font-size: 15px;
-    font-weight: 400;
-    color: #c93756;
+  font-size: 15px;
+  font-weight: 400;
+  color: #c93756;
 `;
 
 export const ContainerRepositories = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-    width: 100%;
-    background-color: #1f2a48;
-    color: white;
-    font-size: calc(10px + 2vmin);
-    text-align: center;
-    border-radius: 20px;
-    padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+  background-color: #1f2a48;
+  color: white;
+  font-size: calc(10px + 2vmin);
+  text-align: center;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 5px;
 `;
 
 export const RepositoriesCard = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-    width: 50%;
-    background-color: #c93756;
-    color: white;
-    font-size: calc(10px + 2vmin);
-    text-align: center;
-    border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  width: 50%;
+  background-color: #c93756;
+  color: white;
+  font-size: calc(10px + 2vmin);
+  text-align: center;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 20px;
 `;
 
 export const RepositoriesNumber = styled.h1`
-    font-size: 30px;
-    font-weight: 600;
-    color: white;
+  font-size: 30px;
+  font-weight: 600;
+  color: white;
 `;
 
 export const RepositoriesName = styled.figcaption`
-    font-size: 15px;
-    font-weight: 400;
-    color: white;
+  font-size: 15px;
+  font-weight: 400;
+  color: white;
+`;
+
+export const ContainerGraph = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 100%;
+  background-color: #1f2a48;
 `;

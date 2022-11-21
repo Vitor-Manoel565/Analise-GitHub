@@ -1,7 +1,18 @@
 import * as S from "../styles/home";
 import { useState } from "react";
-// import { } from 'chart.js'
-// import {Doughnut} from 'react-chartjs-2';
+import { Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  LineController,
+  LineElement,
+  PointElement,
+  LinearScale,
+  Title,
+  ArcElement,
+} from "chart.js";
+
+ChartJS.register(LineController, LineElement, PointElement, LinearScale, Title);
+ChartJS.register(ArcElement);
 import axios from "axios";
 type typeUser = {
   name: string;
@@ -12,12 +23,22 @@ export default function Home() {
   // const [fetching, setFetching] = useState("");
   const [user, getUser] = useState<string | null>(null);
   const [data, setData] = useState<object | null>(null);
+  const [followers, setFollowers] = useState<object | null>(null);
+  const [following, setFollowing] = useState<object | null>(null);
   const [urlAvatar, setUrlAvatar] = useState<any>(null);
 
-  const followers = data?.data?.followers;
-  const following = data?.data?.following;
 
-
+  const dataDoughnut = {
+    labels: ["Red", "Blue"],
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [followers, following],
+        backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+        hoverOffset: 2,
+      },
+    ],
+  };
 
   const formatedDate = (date: string) => {
     const newDate = new Date(date);
@@ -35,7 +56,8 @@ export default function Home() {
       console.log(response.data);
 
       setData(response);
-      console.log(response?.data?.followers);
+      setFollowers(response?.data?.followers);
+      setFollowing(response?.data?.following);
     } catch (err) {
       console.log(err);
     }
@@ -55,7 +77,7 @@ export default function Home() {
       <S.ContainerPerfil>
         <S.ContainerAvatar>
           {data ? <S.PerfilAvatar src={data?.data?.avatar_url} /> : null}
-          <S.ContainerDescription>
+          
             <S.Perfil>
               <S.PerfilName>{data?.data?.name}</S.PerfilName>
               <S.UserName> {data ? `@${data?.data?.login}` : null}</S.UserName>
@@ -65,7 +87,7 @@ export default function Home() {
                 ? `Criado em: ${formatedDate(data?.data?.created_at)}`
                 : null}
             </S.CreateAt>
-          </S.ContainerDescription>
+         
         </S.ContainerAvatar>
         <S.ContainerRepositories>
           <S.RepositoriesCard>
@@ -78,8 +100,12 @@ export default function Home() {
               </>
             ) : null}
           </S.RepositoriesCard>
+        {data ? (
+          <S.ContainerGraph>
+            <Doughnut data={dataDoughnut} height="100" width="100"></Doughnut>
+          </S.ContainerGraph>
+        ) : null}
         </S.ContainerRepositories>
-        {/* <Doughnut data={Data} height="50" width="50"></Doughnut> */}
       </S.ContainerPerfil>
     </S.HomeContainer>
   );
